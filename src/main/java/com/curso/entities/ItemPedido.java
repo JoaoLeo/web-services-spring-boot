@@ -1,6 +1,7 @@
 package com.curso.entities;
 
 import com.curso.entities.pk.ItemPedidoPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -13,7 +14,7 @@ import java.util.Objects;
 public class ItemPedido implements Serializable {
 
     @EmbeddedId
-    private ItemPedidoPK id;
+    private ItemPedidoPK id = new ItemPedidoPK();
     private Integer quantidade;
     private Double preco;
 
@@ -28,7 +29,7 @@ public class ItemPedido implements Serializable {
         this.preco = preco;
     }
 
-
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
