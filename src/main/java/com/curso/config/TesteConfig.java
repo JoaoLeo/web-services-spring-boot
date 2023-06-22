@@ -15,7 +15,6 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired //resolve a dependencia
     private UsuarioRepository usuarioRepository;
 
-
     @Override
     public void run(String... args) throws Exception { //Executa assim que a aplicação for iniciada
         Usuario u1= new Usuario(null, "teste 1", "teste1@gmail.com", "9876543210", "123");
