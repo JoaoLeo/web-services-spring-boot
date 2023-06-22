@@ -19,7 +19,10 @@ public class Produto implements Serializable {
     private Double preco;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_produto_categoria",
+            joinColumns = @JoinColumn(name = "fk_produto"),
+            inverseJoinColumns = @JoinColumn(name = "fk_categoria"))
     private Set<Categoria> categorias = new HashSet<>();
 
     public Produto() {
