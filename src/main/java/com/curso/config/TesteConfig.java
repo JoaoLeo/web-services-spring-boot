@@ -2,10 +2,12 @@ package com.curso.config;
 
 import com.curso.entities.Categoria;
 import com.curso.entities.Pedido;
+import com.curso.entities.Produto;
 import com.curso.entities.Usuario;
 import com.curso.entities.enums.PedidoStatus;
 import com.curso.repositories.CategoriaRepository;
 import com.curso.repositories.PedidoRepository;
+import com.curso.repositories.ProdutoRepository;
 import com.curso.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +29,9 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     @Override
     public void run(String... args) throws Exception { //Executa assim que a aplicação for iniciada
         Usuario u1 = new Usuario(null, "teste 1", "teste1@gmail.com", "9876543210", "123");
@@ -37,8 +42,14 @@ public class TesteConfig implements CommandLineRunner {
         Categoria cat1 = new Categoria(null, "Teste Categoria1");
         Categoria cat2 = new Categoria(null, "Teste Categoria2");
         Categoria cat3 = new Categoria(null, "Teste Categoria3");
+        Produto prod1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Produto prod2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Produto prod3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Produto prod4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Produto prod5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
         usuarioRepository.saveAll(Arrays.asList(u1, u2));
         pedidoRepository.saveAll(Arrays.asList(p1, p2, p3));
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4));
     }
 }
