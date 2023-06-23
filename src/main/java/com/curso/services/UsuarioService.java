@@ -2,8 +2,11 @@ package com.curso.services;
 
 import com.curso.entities.Usuario;
 import com.curso.repositories.UsuarioRepository;
+import com.curso.services.exceptions.DatabaseException;
 import com.curso.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,17 @@ public class UsuarioService {
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        try {
+            if(repository.existsById(id)) {
+                repository.deleteById(id);
+            }
+            else {
+                throw new ResourceNotFoundException(id);
+            }
+        } catch (DataIntegrityViolationException err){
+            throw new DatabaseException(err.getMessage());
+        }
+
     }
     public Usuario update(Long id, Usuario obj){
         Usuario entity = repository.getReferenceById(id);
